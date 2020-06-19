@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
+import Movie from "./Movie";
 
 const initialItem = {
   title: "",
   director: "",
-  metascore: "",
+  metascore: 0,
   stars: [],
   
 };
@@ -17,7 +18,7 @@ const UpdateForm = props => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3006/movieById/${id}`)
+      .get(`http://localhost:5000/api/movies/${id}`)
       .then(res => {
         // res.data
         setItem(res.data);
@@ -28,7 +29,7 @@ const UpdateForm = props => {
   const changeHandler = ev => {
     ev.persist();
     let value = ev.target.value;
-    if (ev.target.name === "price") {
+    if (ev.target.name === "metascore") {
       value = parseInt(value, 10);
     }
 
@@ -42,12 +43,12 @@ const UpdateForm = props => {
     e.preventDefault();
     // make a PUT request to edit the item
     axios
-      .put(`http://localhost:5000/items/${id}`, item)
+      .put(`http://localhost:5000/api/movies/${id}`, item)
       .then(res => {
         // res.data
         props.setItems(res.data);
         // props.setRefresh(true);
-        push(`/item-list/${id}`);
+        push(`/movie-list/${id}`);
       })
       .catch(err => console.log(err));
   };
@@ -78,7 +79,7 @@ const UpdateForm = props => {
           type="number"
           name="metascore"
           onChange={changeHandler}
-          placeholder="Image"
+          placeholder="Metascore"
           value={item.imageUrl}
         />
         <div className="baseline" />
