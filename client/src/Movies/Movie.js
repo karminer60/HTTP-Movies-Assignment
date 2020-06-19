@@ -3,14 +3,14 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import MovieCard from "./MovieCard";
 import { Route, NavLink, useHistory } from "react-router-dom";
-import ItemDescription from "./ItemDescription";
-import ItemShipping from "./ItemShipping";
+
+
 
 
   
 
 
-function Movie({ addToSavedList }) {
+function Movie({ addToSavedList },props) {
   const [movie, setMovie] = useState(null);
   const params = useParams();
   const { push } = useHistory();
@@ -22,7 +22,7 @@ function Movie({ addToSavedList }) {
       .then(res => {
         // res.data
         props.setItems(res.data);
-        push("/item-list");
+        push("/movie-list");
       })
       .catch(err => console.log(err));
   };
