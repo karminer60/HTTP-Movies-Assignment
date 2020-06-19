@@ -15,6 +15,18 @@ function Movie({ addToSavedList }) {
   const params = useParams();
   const { push } = useHistory();
 
+  const handleDelete = e => {
+    e.preventDefault();
+    axios
+      .delete(`http://localhost:5000/movies/${movie}`)
+      .then(res => {
+        // res.data
+        props.setItems(res.data);
+        push("/item-list");
+      })
+      .catch(err => console.log(err));
+  };
+
   const fetchMovie = (id) => {
     axios
       .get(`http://localhost:5000/api/movies/${id}`)
@@ -44,7 +56,7 @@ function Movie({ addToSavedList }) {
 
       <button
         className="md-button"
-        onClick={() => push(`/item-list/update-item/${item.id}`)}
+        onClick={() => push(`/update-movie/:id${movie}`)}
       >
         Edit
       </button>
