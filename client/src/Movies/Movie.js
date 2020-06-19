@@ -18,7 +18,7 @@ function Movie({ addToSavedList },props) {
   const handleDelete = e => {
     e.preventDefault();
     axios
-      .delete(`http://localhost:5000/movies/${movie}`)
+      .delete(`http://localhost:5000/movies/${movie.id}`)
       .then(res => {
         // res.data
         props.setItems(res.data);
@@ -56,7 +56,7 @@ function Movie({ addToSavedList },props) {
 
       <button
         className="md-button"
-        onClick={() => push(`/update-movie/:id${movie.id}`)}
+        onClick={() => push(`/update-movie/${movie.id}`)}
       >
         Edit
       </button>
