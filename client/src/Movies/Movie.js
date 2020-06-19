@@ -56,7 +56,7 @@ function Movie({ addToSavedList },props) {
 
       <button
         className="md-button"
-        onClick={() => push(`/update-movie/:id${movie}`)}
+        onClick={() => push(`/update-movie/:id${movie.id}`)}
       >
         Edit
       </button>
